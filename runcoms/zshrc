@@ -1,3 +1,4 @@
+export KEYTIMEOUT=1
 #
 # Executes commands at the start of an interactive session.
 #
@@ -5,9 +6,66 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+export EDITOR='vim'
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Customize to your needs...
+export PATH="/home/atondwal/.local/bin:.cabal-sandbox/bin:/home/atondwal/bin:/opt/ghc/7.8.4/bin:/home/atondwal/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games":$PATH:/home/atondwal/.gem/ruby/2.3.0/bin:/home/atondwal/src/go/bin
+alias -s pdf="evince"
+alias ra=ranger
+alias nv=nvim
+alias vn=nvim
+alias ack=ag
+alias vw="nvim +VimwikiIndex"
+alias em=emacs -nw
+autoload -U zmv
+bindkey '^R' history-incremental-pattern-search-backward
+
+if [ -e /home/atondwal/.nix-profile/etc/profile.d/nix.sh ]; then . /home/atondwal/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export WORKON_HOME=$HOME/.virtualenvs
+#source /usr/local/bin/virtualenvwrapper.sh
+#prompt agnoster
+export VISUAL=vim
+ZSH_HIGHLIGHT_STYLES[path]='fg=lightblue'
+
+vim() {
+  if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
+    # not running inside nvim
+    nvim "$@"
+  else
+    python -c "from neovim import attach; import os; vim = attach('socket', path='$NVIM_LISTEN_ADDRESS'); vim.command('tabe '+os.path.abspath('$1'));"
+  fi
+}
+
+export GOPATH=$HOME/src/go/
+
+# if [[ -z $NVIM_LISTEN_ADDRESS && $TERM == rxvt-unicode-256color ]]; then
+#   # not running inside nvim
+#   nvim term://zsh && exit
+# fi
+
+export LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so'
+
+
+# Set window title to command just before running it.
+preexec() { printf "\x1b]0;%s\x07" "$1"; }
+
+# Set window title to current working directory after returning from a command.
+precmd() { printf "\x1b]0;%s\x07" "$PWD" }
+
+mkcd ()
+{
+      mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
+
+eval "$(thefuck --alias)"
+
+alias iwsplit="sudo iw dev wlp3s0 interface add wlp3s1 type station"
+unalias e
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
