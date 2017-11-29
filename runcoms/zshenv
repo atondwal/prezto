@@ -1,1 +1,8 @@
 skip_global_compinit=1
+export PATH="/home/atondwal/.local/bin:.cabal-sandbox/bin:/home/atondwal/bin:/opt/ghc/7.8.4/bin:/home/atondwal/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games":$PATH:/home/atondwal/.gem/ruby/2.3.0/bin:/home/atondwal/src/go/bin:/home/atondwal/.nix-profile
+export EDITOR='nvim'
+export VISUAL=nvim
+export WORKON_HOME=$HOME/.virtualenvs
+export GOPATH=$HOME/src/go/
+# for steam
+#export LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so'
